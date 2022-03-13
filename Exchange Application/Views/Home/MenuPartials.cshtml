@@ -1,0 +1,72 @@
+﻿
+
+@if (Session["MenuMaster"] != null)
+{
+    var Menus = (List<BusinessObject.MenuView>)Session["MenuMaster"];
+
+    <ul class="pcoded-item pcoded-left-item" item-border="true" item-border-style="solid" subitem-border="false">
+        @{foreach (var item in Menus.Where(s => s.ParentID == 0).GroupBy(Obj => new { Obj.id }).Distinct().ToList())
+            {
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-pie-chart"></i>
+                        </span>
+                        <span class="pcoded-mtext"> @item.FirstOrDefault().MenuName</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        @{foreach (var firstItem in (Menus.Where(s => s.ParentID == item.FirstOrDefault().id).ToList()))
+                            {
+                                <li>
+                                    @if (firstItem.URL == null)
+                                    {
+                                        <a href="#" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext"> @firstItem.MenuName</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            @foreach (var secondItem in (Menus.Where(s => s.ParentID == firstItem.id).ToList()))
+                                            {
+                                                <li>
+                                                    <a href="@secondItem.URL" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext"> @secondItem.MenuName</span>
+                                                    </a>
+
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="waves-effect waves-dark">
+                                            <span class="pcoded-mtext"> @firstItem.MenuName</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+
+                                            <li>
+                                                <a href="@firstItem.URL" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext"> @firstItem.MenuName</span>
+                                                </a>
+
+                                            </li>
+
+
+                                        </ul>
+                                    }
+
+
+
+
+                                </li>
+
+                            }
+                        }
+                    </ul>
+                </li>
+
+            }
+        }
+    </ul>
+}
+
+

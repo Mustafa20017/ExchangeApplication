@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -23,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,10 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -88,11 +99,408 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\autofill.datatables.min.css" />
+    <Content Include="Content\css\bars-1to10.css" />
+    <Content Include="Content\css\bars-horizontal.css" />
+    <Content Include="Content\css\bars-movie.css" />
+    <Content Include="Content\css\bars-pill.css" />
+    <Content Include="Content\css\bars-reversed.css" />
+    <Content Include="Content\css\bars-square.css" />
+    <Content Include="Content\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\css\bootstrap-multiselect.css" />
+    <Content Include="Content\css\bootstrap-slider.css" />
+    <Content Include="Content\css\bootstrap-tagsinput.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\buttons.datatables.min-2.css" />
+    <Content Include="Content\css\buttons.datatables.min.css" />
+    <Content Include="Content\css\c3.css" />
+    <Content Include="Content\css\chartist.css" />
+    <Content Include="Content\css\clndr.css" />
+    <Content Include="Content\css\component.css" />
+    <Content Include="Content\css\cropper.css" />
+    <Content Include="Content\css\css-stars.css" />
+    <Content Include="Content\css\custom-toolbar.css" />
+    <Content Include="Content\css\datatables.bootstrap4.min.css" />
+    <Content Include="Content\css\datedropper.min.css" />
+    <Content Include="Content\css\daterangepicker.css" />
+    <Content Include="Content\css\feather.css" />
+    <Content Include="Content\css\flag-icon.min.css" />
+    <Content Include="Content\css\font-awesome-n.min.css" />
+    <Content Include="Content\css\font-awesome.min-2.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\fontawesome-stars-o.css" />
+    <Content Include="Content\css\fontawesome-stars.css" />
+    <Content Include="Content\css\footable.bootstrap.min.css" />
+    <Content Include="Content\css\footable.standalone.min.css" />
+    <Content Include="Content\css\fullcalendar.css" />
+    <Content Include="Content\css\fullcalendar.print.css" />
+    <Content Include="Content\css\handsontable.full.min.css" />
+    <Content Include="Content\css\icofont.css" />
+    <Content Include="Content\css\introjs.css" />
+    <Content Include="Content\css\jqpagination.css" />
+    <Content Include="Content\css\jquery-filer.css" />
+    <Content Include="Content\css\jquery-jvectormap-2.0.2.css" />
+    <Content Include="Content\css\jquery.datatables.min-2.css" />
+    <Content Include="Content\css\jquery.datatables.min.css" />
+    <Content Include="Content\css\jquery.filer-dragdropbox-theme.css" />
+    <Content Include="Content\css\jquery.filer.css" />
+    <Content Include="Content\css\jquery.minicolors.css" />
+    <Content Include="Content\css\jquery.steps.css" />
+    <Content Include="Content\css\jquery.toolbar.css" />
+    <Content Include="Content\css\leaflet.css" />
+    <Content Include="Content\css\list.css" />
+    <Content Include="Content\css\mapbox-gl.css" />
+    <Content Include="Content\css\markercluster.css" />
+    <Content Include="Content\css\markercluster.default.css" />
+    <Content Include="Content\css\morris.css" />
+    <Content Include="Content\css\multi-select.css" />
+    <Content Include="Content\css\nestable.css" />
+    <Content Include="Content\css\notification.css" />
+    <Content Include="Content\css\nv.d3.css" />
+    <Content Include="Content\css\offline-language-english.css" />
+    <Content Include="Content\css\offline-theme-slide.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\owl.theme.default.css" />
+    <Content Include="Content\css\pages.css" />
+    <Content Include="Content\css\prism.css" />
+    <Content Include="Content\css\radial.css" />
+    <Content Include="Content\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\css\responsive.datatables.css" />
+    <Content Include="Content\css\select.datatables.min-2.css" />
+    <Content Include="Content\css\select.datatables.min.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\css\simple-line-icons.css" />
+    <Content Include="Content\css\spectrum.css" />
+    <Content Include="Content\css\stroll.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style.min.css" />
+    <Content Include="Content\css\sweetalert.css" />
+    <Content Include="Content\css\swiper.min.css" />
+    <Content Include="Content\css\switchery.min.css" />
+    <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\treeview.css" />
+    <Content Include="Content\css\waves.min.css" />
+    <Content Include="Content\css\widget.css" />
+    <Content Include="Content\jpg\01.jpg" />
+    <Content Include="Content\jpg\03.jpg" />
+    <Content Include="Content\jpg\animate.jpg" />
+    <Content Include="Content\jpg\avatar-1.jpg" />
+    <Content Include="Content\jpg\avatar-2.jpg" />
+    <Content Include="Content\jpg\avatar-3.jpg" />
+    <Content Include="Content\jpg\avatar-4.jpg" />
+    <Content Include="Content\jpg\avatar-5.jpg" />
+    <Content Include="Content\jpg\card1.jpg" />
+    <Content Include="Content\jpg\card13.jpg" />
+    <Content Include="Content\jpg\card14.jpg" />
+    <Content Include="Content\jpg\card2.jpg" />
+    <Content Include="Content\jpg\cs-1.jpg" />
+    <Content Include="Content\jpg\cs-2.jpg" />
+    <Content Include="Content\jpg\error-1.jpg" />
+    <Content Include="Content\jpg\error-2.jpg" />
+    <Content Include="Content\jpg\error-3.jpg" />
+    <Content Include="Content\jpg\error-4.jpg" />
+    <Content Include="Content\jpg\error-5.jpg" />
+    <Content Include="Content\jpg\error-6.jpg" />
+    <Content Include="Content\jpg\nav1.jpg" />
+    <Content Include="Content\jpg\nav10.jpg" />
+    <Content Include="Content\jpg\nav11.jpg" />
+    <Content Include="Content\jpg\nav12.jpg" />
+    <Content Include="Content\jpg\nav2.jpg" />
+    <Content Include="Content\jpg\nav3.jpg" />
+    <Content Include="Content\jpg\nav4.jpg" />
+    <Content Include="Content\jpg\nav5.jpg" />
+    <Content Include="Content\jpg\nav6.jpg" />
+    <Content Include="Content\jpg\nav7.jpg" />
+    <Content Include="Content\jpg\nav8.jpg" />
+    <Content Include="Content\jpg\nav9.jpg" />
+    <Content Include="Content\jpg\overflow.jpg" />
+    <Content Include="Content\jpg\p1.jpg" />
+    <Content Include="Content\jpg\p2.jpg" />
+    <Content Include="Content\jpg\p3.jpg" />
+    <Content Include="Content\jpg\p4.jpg" />
+    <Content Include="Content\jpg\sale-img.jpg" />
+    <Content Include="Content\jpg\slide1.jpg" />
+    <Content Include="Content\jpg\slide2.jpg" />
+    <Content Include="Content\jpg\slide3.jpg" />
+    <Content Include="Content\jpg\slide4.jpg" />
+    <Content Include="Content\jpg\slider5.jpg" />
+    <Content Include="Content\jpg\slider6.jpg" />
+    <Content Include="Content\jpg\slider7.jpg" />
+    <Content Include="Content\jpg\task-u1.jpg" />
+    <Content Include="Content\jpg\task-u2.jpg" />
+    <Content Include="Content\jpg\task-u3.jpg" />
+    <Content Include="Content\jpg\task-u4.jpg" />
+    <Content Include="Content\js\accordion.js" />
+    <Content Include="Content\js\amcharts.js" />
+    <Content Include="Content\js\ammap.min.js" />
+    <Content Include="Content\js\analytic-dashboard.min.js" />
+    <Content Include="Content\js\animation.js" />
+    <Content Include="Content\js\appearance-table.js" />
+    <Content Include="Content\js\autonumeric.js" />
+    <Content Include="Content\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\js\bootstrap-growl.min.js" />
+    <Content Include="Content\js\bootstrap-maxlength.js" />
+    <Content Include="Content\js\bootstrap-multiselect.js" />
+    <Content Include="Content\js\bootstrap-slider.js" />
+    <Content Include="Content\js\bootstrap-tagsinput.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\buttons.colvis.min.js" />
+    <Content Include="Content\js\buttons.flash.min.js" />
+    <Content Include="Content\js\buttons.html5.min.js" />
+    <Content Include="Content\js\buttons.print.min.js" />
+    <Content Include="Content\js\c3-custom-chart.js" />
+    <Content Include="Content\js\c3.js" />
+    <Content Include="Content\js\calendar.js" />
+    <Content Include="Content\js\cell-features.js" />
+    <Content Include="Content\js\cell-types.js" />
+    <Content Include="Content\js\chart-nvd3.js" />
+    <Content Include="Content\js\chart-sparkline.js" />
+    <Content Include="Content\js\chart.js" />
+    <Content Include="Content\js\chartist-plugin-threshold.js" />
+    <Content Include="Content\js\chartist.js" />
+    <Content Include="Content\js\chartjs-custom.js" />
+    <Content Include="Content\js\chartlist-custom.js" />
+    <Content Include="Content\js\chroma.min.js" />
+    <Content Include="Content\js\ckeditor-custom.js" />
+    <Content Include="Content\js\ckeditor.js" />
+    <Content Include="Content\js\classie.js" />
+    <Content Include="Content\js\clndr-custom.js" />
+    <Content Include="Content\js\clndr.js" />
+    <Content Include="Content\js\colreorder-custom.js" />
+    <Content Include="Content\js\columns-only.js" />
+    <Content Include="Content\js\common-pages.js" />
+    <Content Include="Content\js\crm-dashboard.min.js" />
+    <Content Include="Content\js\croper.js" />
+    <Content Include="Content\js\cropper.min.js" />
+    <Content Include="Content\js\css-scrollbars.js" />
+    <Content Include="Content\js\curvedlines.js" />
+    <Content Include="Content\js\custom-dashboard.min.js" />
+    <Content Include="Content\js\custom-google-chart.js" />
+    <Content Include="Content\js\custom-nestable.js" />
+    <Content Include="Content\js\custom-picker.js" />
+    <Content Include="Content\js\custom-prism.js" />
+    <Content Include="Content\js\custom-toolbar.js" />
+    <Content Include="Content\js\d3.js" />
+    <Content Include="Content\js\d3.min.js" />
+    <Content Include="Content\js\data-operation.js" />
+    <Content Include="Content\js\data-table-custom.js" />
+    <Content Include="Content\js\datatables.autofill.min.js" />
+    <Content Include="Content\js\datatables.bootstrap4.min.js" />
+    <Content Include="Content\js\datatables.buttons.min-2.js" />
+    <Content Include="Content\js\datatables.buttons.min.js" />
+    <Content Include="Content\js\datatables.colreorder.min.js" />
+    <Content Include="Content\js\datatables.fixedcolumns.min.js" />
+    <Content Include="Content\js\datatables.fixedheader.min.js" />
+    <Content Include="Content\js\datatables.keytable.min.js" />
+    <Content Include="Content\js\datatables.responsive.min-2.js" />
+    <Content Include="Content\js\datatables.responsive.min.js" />
+    <Content Include="Content\js\datatables.rowreorder.min.js" />
+    <Content Include="Content\js\datatables.scroller.min.js" />
+    <Content Include="Content\js\datatables.select.min-2.js" />
+    <Content Include="Content\js\datatables.select.min.js" />
+    <Content Include="Content\js\datedropper.min.js" />
+    <Content Include="Content\js\daterangepicker.js" />
+    <Content Include="Content\js\de.js" />
+    <Content Include="Content\js\dropzone-amd-module.min.js" />
+    <Content Include="Content\js\editable.js" />
+    <Content Include="Content\js\email-decode.min.js" />
+    <Content Include="Content\js\excanvas.js" />
+    <Content Include="Content\js\extension-btns-custom.js" />
+    <Content Include="Content\js\extensions-custom.js" />
+    <Content Include="Content\js\fixed-column-custom.js" />
+    <Content Include="Content\js\fixed-header-custom.js" />
+    <Content Include="Content\js\float-chart-custom.js" />
+    <Content Include="Content\js\foo-table-custom.js" />
+    <Content Include="Content\js\footable.min.js" />
+    <Content Include="Content\js\form-mask.js" />
+    <Content Include="Content\js\form-validation.js" />
+    <Content Include="Content\js\form-wizard.js" />
+    <Content Include="Content\js\fullcalendar.min.js" />
+    <Content Include="Content\js\gauge.js" />
+    <Content Include="Content\js\gdp-data.js" />
+    <Content Include="Content\js\gmaps.js" />
+    <Content Include="Content\js\google-maps.js" />
+    <Content Include="Content\js\handsontable.full.js" />
+    <Content Include="Content\js\horizontal-layout.min.js" />
+    <Content Include="Content\js\i18next.min.js" />
+    <Content Include="Content\js\i18nextbrowserlanguagedetector.min.js" />
+    <Content Include="Content\js\i18nextxhrbackend.min.js" />
+    <Content Include="Content\js\icon-modal.js" />
+    <Content Include="Content\js\inputmask.js" />
+    <Content Include="Content\js\integration.js" />
+    <Content Include="Content\js\intro.js" />
+    <Content Include="Content\js\jquery-i18next.min.js" />
+    <Content Include="Content\js\jquery-jvectormap-2.0.2.min.js" />
+    <Content Include="Content\js\jquery-jvectormap-asia-mill.js" />
+    <Content Include="Content\js\jquery-jvectormap-au-mill.js" />
+    <Content Include="Content\js\jquery-jvectormap-ca-lcc.js" />
+    <Content Include="Content\js\jquery-jvectormap-de-mill.js" />
+    <Content Include="Content\js\jquery-jvectormap-in-mill.js" />
+    <Content Include="Content\js\jquery-jvectormap-uk-mill-en.js" />
+    <Content Include="Content\js\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="Content\js\jquery-jvectormap-us-il-chicago-mill-en.js" />
+    <Content Include="Content\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Content\js\jquery.barrating.js" />
+    <Content Include="Content\js\jquery.cookie.js" />
+    <Content Include="Content\js\jquery.datatables.min-2.js" />
+    <Content Include="Content\js\jquery.datatables.min.js" />
+    <Content Include="Content\js\jquery.flot.categories.js" />
+    <Content Include="Content\js\jquery.flot.js" />
+    <Content Include="Content\js\jquery.flot.pie.js" />
+    <Content Include="Content\js\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\js\jquery.inputmask.js" />
+    <Content Include="Content\js\jquery.jqpagination.js" />
+    <Content Include="Content\js\jquery.knob.js" />
+    <Content Include="Content\js\jquery.mcustomscrollbar.concat.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.minicolors.min.js" />
+    <Content Include="Content\js\jquery.mousewheel.min.js" />
+    <Content Include="Content\js\jquery.multi-select.js" />
+    <Content Include="Content\js\jquery.nestable.js" />
+    <Content Include="Content\js\jquery.peity.js" />
+    <Content Include="Content\js\jquery.quicksearch.js" />
+    <Content Include="Content\js\jquery.slimscroll.js" />
+    <Content Include="Content\js\jquery.sparkline.js" />
+    <Content Include="Content\js\jquery.steps.js" />
+    <Content Include="Content\js\jquery.tabledit.js" />
+    <Content Include="Content\js\jquery.toolbar.min.js" />
+    <Content Include="Content\js\jquery.tree.js" />
+    <Content Include="Content\js\jquery.validate.js" />
+    <Content Include="Content\js\jquery.wavify.js" />
+    <Content Include="Content\js\jscolor.js" />
+    <Content Include="Content\js\jstree.min.js" />
+    <Content Include="Content\js\jszip.min-2.js" />
+    <Content Include="Content\js\jszip.min.js" />
+    <Content Include="Content\js\key-table-custom.js" />
+    <Content Include="Content\js\knob-custom-chart.js" />
+    <Content Include="Content\js\leaflet-mapbox-gl.js" />
+    <Content Include="Content\js\leaflet.js" />
+    <Content Include="Content\js\leaflet.markercluster.js" />
+    <Content Include="Content\js\light.js" />
+    <Content Include="Content\js\list-custom.js" />
+    <Content Include="Content\js\loader.js" />
+    <Content Include="Content\js\map-api.js" />
+    <Content Include="Content\js\map-vector.js" />
+    <Content Include="Content\js\mapbox-gl.js" />
+    <Content Include="Content\js\markerclusterer.js" />
+    <Content Include="Content\js\menu-compact.js" />
+    <Content Include="Content\js\menu-header-fixed.js" />
+    <Content Include="Content\js\menu-hori-fixed.js" />
+    <Content Include="Content\js\menu-sidebar-fixed.js" />
+    <Content Include="Content\js\menu-static.js" />
+    <Content Include="Content\js\modal.js" />
+    <Content Include="Content\js\modaleffects.js" />
+    <Content Include="Content\js\modernizr.js" />
+    <Content Include="Content\js\moment-with-locales.min.js" />
+    <Content Include="Content\js\moment.js" />
+    <Content Include="Content\js\moment.min-2.js" />
+    <Content Include="Content\js\moment.min.js" />
+    <Content Include="Content\js\morris-custom-chart.js" />
+    <Content Include="Content\js\morris.js" />
+    <Content Include="Content\js\notification.js" />
+    <Content Include="Content\js\nv.d3.js" />
+    <Content Include="Content\js\offline-custom.js" />
+    <Content Include="Content\js\offline.min.js" />
+    <Content Include="Content\js\owl-custom.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\js\pcoded.min.js" />
+    <Content Include="Content\js\pdfmake.min-2.js" />
+    <Content Include="Content\js\pdfmake.min.js" />
+    <Content Include="Content\js\peity-custom-chart.js" />
+    <Content Include="Content\js\pie.min.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\js\range-slider.js" />
+    <Content Include="Content\js\raphael.min.js" />
+    <Content Include="Content\js\rating.js" />
+    <Content Include="Content\js\responsive-custom.js" />
+    <Content Include="Content\js\responsive.bootstrap4.min.js" />
+    <Content Include="Content\js\rickshaw.js" />
+    <Content Include="Content\js\rickshow-custom-.js" />
+    <Content Include="Content\js\rocket-loader.min.js" />
+    <Content Include="Content\js\row-reorder-custom.js" />
+    <Content Include="Content\js\rows-cols-table.js" />
+    <Content Include="Content\js\rows-only.js" />
+    <Content Include="Content\js\script.js" />
+    <Content Include="Content\js\script.min.js" />
+    <Content Include="Content\js\scroller-custom.js" />
+    <Content Include="Content\js\select-custom.js" />
+    <Content Include="Content\js\select2-custom.js" />
+    <Content Include="Content\js\select2.full.min.js" />
+    <Content Include="Content\js\serial.js" />
+    <Content Include="Content\js\session-idle-timeout-custom.js" />
+    <Content Include="Content\js\sessiontimeout-custom.js" />
+    <Content Include="Content\js\session_timeout.min.js" />
+    <Content Include="Content\js\smoothscroll.js" />
+    <Content Include="Content\js\sortable-custom.js" />
+    <Content Include="Content\js\sortable.js" />
+    <Content Include="Content\js\spectrum.js" />
+    <Content Include="Content\js\stream_layers.js" />
+    <Content Include="Content\js\stroll.js" />
+    <Content Include="Content\js\sweetalert.min.js" />
+    <Content Include="Content\js\swiper-custom.js" />
+    <Content Include="Content\js\swiper.min.js" />
+    <Content Include="Content\js\switchery.min.js" />
+    <Content Include="Content\js\swithces.js" />
+    <Content Include="Content\js\tinymce.min.js" />
+    <Content Include="Content\js\todo.js" />
+    <Content Include="Content\js\tweenmax.min.js" />
+    <Content Include="Content\js\typeahead.bundle.min.js" />
+    <Content Include="Content\js\underscore-min-2.js" />
+    <Content Include="Content\js\underscore-min.js" />
+    <Content Include="Content\js\usalow.js" />
+    <Content Include="Content\js\utilities.js" />
+    <Content Include="Content\js\validate.js" />
+    <Content Include="Content\js\vertical-layout.min.js" />
+    <Content Include="Content\js\vfs_fonts-2.js" />
+    <Content Include="Content\js\vfs_fonts.js" />
+    <Content Include="Content\js\waves.min.js" />
+    <Content Include="Content\js\widget-chart.js" />
+    <Content Include="Content\js\widget-data.js" />
+    <Content Include="Content\js\widget-statistic.js" />
+    <Content Include="Content\js\wysiwyg-editor.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -101,6 +509,36 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Views\Shared\MasterPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\MenuPartial.cshtml" />
+    <Content Include="Views\Home\DashBoard.cshtml" />
+    <Content Include="Views\Home\MenuPartials.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,8 +548,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{25cf03a4-0f61-41f5-a5f9-e2ccfeb202c5}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">
+      <Project>{9a09cd02-c7c9-49c1-97e4-6c612ab21d8b}</Project>
+      <Name>BusinessObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -144,7 +591,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

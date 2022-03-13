@@ -1,0 +1,147 @@
+﻿@model BusinessObject.BillMasterView
+
+@{
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+@using (Html.BeginForm("AddBillMaster", "Currency", FormMethod.Post, new { onsubmit = "return GetRows();" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Add BillTranscation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerId, new { })
+        @Html.HiddenFor(model => model.BillMasterId, new { })
+        @Html.HiddenFor(model => model.GridRows, new { id = "HdnRows" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TranType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TranType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TranType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BillType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BillType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control date" } })
+                @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <table class="table table-hover" id="grid">
+            <thead>
+                <tr>
+                    <td>Currency Code<input class="form-control" id="Code" /></td>
+                    <td>Currency<input class="form-control" id="Currency" /></td>
+                    <td style="display:none"><input id="CurrencyId" /></td>
+                    <td>FC Amount<input class="form-control" id="FcAmount" /></td>
+                    <td>Rate<input class="form-control" id="Rate" /></td>
+                    <td>LC Amount<input class="form-control" id="LcAmount" /></td>
+                    <td><a onclick="AddRow()" class="btn btn-success"><i class="fa fa-plus" style="font-size: 18px;font-weight:bold;"></i></a></td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LcAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LcAmount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LcAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FcAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FcAmount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FcAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script>
+    function AddRow() {
+        debugger
+        var Row = '<tr>';
+        Row += '<td>' + $('#Code').val() + '</td>'
+        Row += '<td>' + $('#Currency').val() + '</td>'
+        Row += '<td style="display:none">' + $('#CurrencyId').val() + '</td>'
+        Row += '<td>' + $('#FcAmount').val() + '</td>'
+        Row += '<td>' + $('#Rate').val() + '</td>'
+        Row += '<td>' + $('#LcAmount').val() + '</td>'
+        Row += '<td><button onclick="DelRow(this)" class ="btn btn-danger"><i class="fi fi-dash-lg" style="font-size: 18px;font-weight:bold;"></button></i></td>'
+
+        $('#grid tbody').append(Row);
+    }
+
+    function GetRows() {
+        debugger;
+        var Arr = [];
+        $('#grid > tbody tr').each(function (index, elem) {
+            var tb = {}
+
+            tb.CurrencyId = $($(this).find('td:eq(2)')).html();
+            tb.FcAmount = $($(this).find('td:eq(3)')).html();
+            tb.Rate = $($(this).find('td:eq(4)')).html();
+            tb.LcAmount = $($(this).find('td:eq(5)')).html();
+
+            Arr.push(tb);
+
+        })
+        $('#HdnRows').val(JSON.stringify(Arr))
+    }
+</script>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
